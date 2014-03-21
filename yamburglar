@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby -w
+# Parse a yaml file and exit with a 1 if there's an error.
+
+require "yaml"
+
+begin
+  open(ARGV[0]) do |f|
+    YAML.load(f.read)
+  end
+rescue Psych::SyntaxError => error
+  puts error.message
+  exit 1
+end
+
+exit 0
